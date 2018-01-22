@@ -1,25 +1,35 @@
 <html>
-    <body>
-        <canvas id="canvas" width="800" height="600"></canvas>
-        <script src="robot-arm.js"></script>
-        <script>
-            // Initialize the robot arm
-            var canvas = document.getElementById("canvas");
-            var robotArm = new RobotArm(canvas);
-            // Either use loadLevel or randomLevel to create a start scene
-            robotArm.loadLevel("exercise 11");
+     <body>
+         <canvas id="canvas" width="800" height="600"></canvas>
+         <script src="robot-arm.js"></script>
+         <script>
+             //Robotarm bibliotheek inladen
+             var canvas = document.getElementById("canvas");
+             var robotArm = new RobotArm(canvas);
 
-            // My instructions come here
+             //Het level inladen
+             robotArm.loadLevel("exercise 11");
 
-            robotArm.speed = 100000000;
-
-            robotArm.moveRight();
-            robotArm.grab();
-            robotArm.moveRight();
-            robotArm.drop();
-
-            // Call run to run the animations
-            robotArm.run();
+             // Jou instructies volgen hier
+             for (var i = 0; i < 9; i++) {
+                 robotArm.moveRight();
+             }
+             for (var l = 0; l < 9; l++) {
+                 robotArm.grab();
+                 var color = robotArm.scan();
+                 if (color === 'white') {
+                     robotArm.moveRight();
+                     robotArm.drop();
+                     robotArm.moveLeft();
+                     robotArm.moveLeft();
+                 } else {
+                     robotArm.drop();
+                     robotArm.moveLeft();
+                 }
+             }
+           // De door jou opgegeven instructies uitvoeren
+             robotArm.run();
+             robotArm.speed = 500;
         </script>
     </body>
-</html>
+ </html>
